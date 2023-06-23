@@ -25,11 +25,10 @@ public class VnModifyController {
     public VnModifyDto VaccountNumberModify(@RequestBody VnModifyDto vnModifyDto){
 
         //컨트롤러에서는 값이 있냐 없냐 약한 validation정도만 수행
-
-
         System.out.println("modify");
-        //return this.vnModifyService.save(vnModifyDto);
-        return this.vnModifyService.savejpa(vnModifyDto);
+        return this.vnModifyService.save(vnModifyDto);
+
+
     }
 
 }
