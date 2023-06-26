@@ -1,13 +1,19 @@
 package com.hecto.vaccount.controller;
 
+import com.hecto.vaccount.common.exception.UserNotFoundException;
 import com.hecto.vaccount.dto.VnModifyDto;
 import com.hecto.vaccount.service.VnModifyService;
 import com.hecto.vaccount.service.impl.VnModifyServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@ControllerAdvice
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Slf4j
 @RestController
 @RequestMapping("/vaccount")
@@ -24,9 +30,13 @@ public class VnModifyController {
     @PostMapping("/modify")
     public VnModifyDto VaccountNumberModify(@RequestBody VnModifyDto vnModifyDto){
 
-        //컨트롤러에서는 값이 있냐 없냐 약한 validation정도만 수행
-        System.out.println("Controller(1)");
+        //PK가 없는 경우
+        if(vnModifyDto.getMid() == ""){
+            throw new UserNotFoundException(String.format("Mid is must have value"));
+        }
+
         return vnModifyService.VnModifyBiz(vnModifyDto);
+
     }
 
 }
