@@ -19,8 +19,11 @@ public class VnModifyRepositoryImpl implements VnModifyRepository {
 
     @Override
     public VnModifyDto save(VnModifyDto vnModifyDto) {
+        System.out.println("Repository(1)");
         String sql = "insert into VACCOUNT_MODIFY_HISTORY(mid,tid,ver) values(?,?,?)";
+        System.out.println("Repository(2)");
         jdbcTemplate.update(sql,vnModifyDto.getMid(),vnModifyDto.getTid(),vnModifyDto.getVer());
+        System.out.println("Repository(3)");
         return vnModifyDto;
     }
 }

@@ -16,23 +16,25 @@ public class VnModifyServiceImpl implements VnModifyService {
         this.vnModifyRepository = vnModifyRepository;
     }
 
-    @Transactional
-    public void VaccountModifyBiz(){
-        VnModifyDto vnModifyDto = new VnModifyDto();
-        validation(vnModifyDto);
-        save(vnModifyDto);
-    }
-
-
-    private void validation(VnModifyDto vnModifyDto){
+    private void Validation(VnModifyDto vnModifyDto){
         if(vnModifyDto.getMid().equals("ex")){
             throw new IllegalStateException("예외발생");
         }
     }
 
-    @Override
-    public VnModifyDto save(VnModifyDto vnModifyDto) {
-        vnModifyRepository.save(vnModifyDto);
-        return vnModifyDto;
+    public VnModifyDto DbExcute(VnModifyDto vnModifyDto) {
+        return vnModifyRepository.save(vnModifyDto);
     }
+
+    @Override
+    @Transactional
+    public VnModifyDto VnModifyBiz(VnModifyDto vnModifyDto) {
+        System.out.println("Service(1)");
+        Validation(vnModifyDto);
+        System.out.println("Service(2)");
+        return DbExcute(vnModifyDto);
+    }
+
+
+
 }
