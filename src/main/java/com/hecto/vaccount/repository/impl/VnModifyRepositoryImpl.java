@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Slf4j
 @Repository
+
 //4. InfraStructure Layer
 public class VnModifyRepositoryImpl implements VnModifyRepository {
 

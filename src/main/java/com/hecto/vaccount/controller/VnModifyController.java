@@ -11,6 +11,11 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -32,11 +37,14 @@ public class VnModifyController {
 
         //PK가 없는 경우
         if(vnModifyDto.getMid() == ""){
+//            throw new UserNotFoundException(String.format("Mid is must have value"));
             throw new UserNotFoundException(String.format("Mid is must have value"));
         }
 
         return vnModifyService.VnModifyBiz(vnModifyDto);
 
     }
+
+
 
 }
